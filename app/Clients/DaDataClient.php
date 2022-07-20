@@ -4,6 +4,9 @@ namespace App\Clients;
 
 use Dadata\DadataClient as BaseDadataClient;
 
+/**
+ * @mixin BaseDadataClient
+ */
 class DaDataClient
 {
     public BaseDadataClient $client;
