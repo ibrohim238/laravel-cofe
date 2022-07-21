@@ -12,13 +12,15 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $address = app(GeoService::class)->get($request);
+        $addresses = app(GeoService::class)->get($request);
 
-        response()->json($address);
+        response()->json($addresses);
     }
 
     public function select(Request $request)
     {
-        return app(GeoService::class)->select($request);
+        $address = app(GeoService::class)->select($request);
+
+        return response()->json($address);
     }
 }
