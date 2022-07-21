@@ -22,21 +22,21 @@ class GeoService
 
     public function get(Request $request)
     {
-        $address = app(DaDataClient::class)
+        $addresses = app(DaDataClient::class)
             ->suggest('address', $request->get('address'));
 
-        Cache::put('address', $address, 900);
+        Cache::put('addresses', $addresses, 900);
 
-        return $address;
+        return $addresses;
     }
 
     public function select(Request $request): float
     {
-        $address = Cache::get('address');
+        $addresses = Cache::get('addresses');
         $select = $request->get('address');
 
-        $lat = $address[$select]['data']['geo_lat'];
-        $lng = $address[$select]['data']['geo_lon'];
+        $lat = $addresses[$select]['data']['geo_lat'];
+        $lng = $addresses[$select]['data']['geo_lon'];
 
         $coordinate2 = app(Coordinate::class, [
             'lat' => $lat,
